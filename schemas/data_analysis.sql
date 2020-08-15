@@ -74,8 +74,20 @@ from employee
 group by last_name
 order by count(last_name)DESC;
 
+-- Bonus (Optional), create table with employee salary and title, plot bar chart in python for ave salary by title
+CREATE VIEW title_salary_details AS
+select e.emp_no, e.emp_title_id, e.first_name, e.last_name, t.title, s.salary 
+from employee as e, salaries as s, titles as t  where e.emp_title_id = t.title_id and 
+s.emp_no = e.emp_no;
 
+select * from title_salary_details
 
+CREATE VIEW ave_salary AS
+select title AS "Title", round(avg(salary),2) AS "Average Salary" 
+from title_salary_details
+group by title;
+
+select * from ave_salary
 
 
 
